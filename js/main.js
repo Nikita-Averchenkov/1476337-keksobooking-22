@@ -24,3 +24,4 @@ const getRandomFloatingPoint = function (min, max, decimalDigits) {
   }
 }
 alert(getRandomFloatingPoint(0, 9.9, 3));
+
