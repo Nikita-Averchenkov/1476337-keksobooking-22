@@ -56,6 +56,7 @@ const createOffers = () => {
 const offers = createOffers();
 console.log(offers);
 
+
 export {
   offers
 };
