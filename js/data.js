@@ -5,10 +5,6 @@ import {
   getArrRandomLength
 } from './util.js';
 
-export {
-  offers
-};
-
 const types = ['palace', 'flat', 'house', 'bungalow']
 const checks = ['12:00', '13:00', '14:00']
 const titles = ['двухместный номер', 'трёхместный номер', 'номер кинг сайз']
@@ -17,8 +13,6 @@ const guests = [2, 1]
 const features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 const description = 'Помещение большое. В нем трое окон и справа от дверей стоят книжные шкафы.';
 const photos = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
-
-
 
 
 const createOffers = () => {
@@ -61,3 +55,7 @@ const createOffers = () => {
 
 const offers = createOffers();
 console.log(offers);
+
+export {
+  offers
+};
