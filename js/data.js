@@ -5,9 +5,6 @@ import {
   getArrRandomLength
 } from './util.js';
 
-export {
-  offers
-};
 
 const types = ['palace', 'flat', 'house', 'bungalow']
 const checks = ['12:00', '13:00', '14:00']
@@ -61,3 +58,7 @@ const createOffers = () => {
 
 const offers = createOffers();
 console.log(offers);
+
+export {
+  offers
+};
