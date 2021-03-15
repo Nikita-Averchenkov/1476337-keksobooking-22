@@ -9,11 +9,10 @@ const typeProperty = {
   palace: 'Дворец',
 };
 
-const similarListElement = document.querySelector('.map__canvas');
+//const similarListElement = document.querySelector('.map__canvas');
 const similarCardTemplate = document.querySelector('#card')
   .content
   .querySelector('.popup');
-
 
 
 const createFeatures = (featuresList) => {
@@ -25,7 +24,6 @@ const createFeatures = (featuresList) => {
   });
   return featuresContainer;
 }
-
 
 
 const createPhotos = (photosList) => {
@@ -46,6 +44,7 @@ const similarCards = createOffers();
 
 const createCardsArray = () => {
   const cards = [];
+  const coords = [];
 
   similarCards.forEach((card) => {
     const cardElement = similarCardTemplate.cloneNode(true);
@@ -58,25 +57,30 @@ const createCardsArray = () => {
     cardElement.querySelector('.popup__description').textContent = card.offer.description;
     cardElement.querySelector('.popup__avatar').src = card.author.avatar;
 
-    const photos = createPhotos(card.offer.photos, cardElement.querySelector('.popup__photo'));
+    const photos = createPhotos(card.offer.photos, cardElement.querySelector('.popup__photo').classList.add('visually-hidden'));
     cardElement.querySelector('.popup__photos').innerHTML = '';
     cardElement.querySelector('.popup__photos').appendChild(photos);
 
-    const features = createFeatures(card.offer.features, cardElement.querySelector('.popup__feature'));
+
+    const features = createFeatures(card.offer.features, cardElement.querySelector('.popup__feature').classList.add('visually-hidden'));
     cardElement.querySelector('.popup__features').innerHTML = '';
     cardElement.querySelector('.popup__features').appendChild(features);
 
+    coords.push({x: card.location[0], y: card.location[1]});
     cards.push(cardElement);
   });
 
-  return cards;
+  return [cards, coords];
 };
 
-const cardsArray = createCardsArray();
+const [cards, coords] = createCardsArray();
 
-const addCardIntoContainer = (arr) => {
-  //const fragment = document.createDocumentFragment();
-  similarListElement.appendChild(arr[0]);
-};
 
-addCardIntoContainer(cardsArray);
+//const addCardIntoContainer = (arr) => {
+//const fragment = document.createDocumentFragment();
+//  similarListElement.appendChild(arr[0]);
+//};
+
+//addCardIntoContainer(cardsArray);
+
+export {cards, coords};
