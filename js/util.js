@@ -1,45 +1,40 @@
-export {
-  getRandomInteger,
-  getRandomFloatingPoint,
-  getRandomElement,
-  getArrRandomLength
+const ALERT_SHOW_TIME = 5000;
+
+const getOfferType = (types) => {
+  switch (types) {
+    case 'flat':
+      return 'Квартира';
+    case 'bungalow':
+      return 'Бунгало';
+    case 'house':
+      return 'Дом';
+    case 'palace':
+      return 'Дворец';
+    default:
+      return 'Любой тип жилья';
+  }
 };
 
-// Функция, возвращающая случайное число из переданного диапазона включительно min ... max
-const getRandomInteger = function (min, max) {
-  const randomNumber = min + Math.random() * (max - min + 1);
-  if (min < 0) {
-    return new Error('Диапазон может быть больше или равен нулю')
-  } else if (min >= max) {
-    return new Error('Начальное значение диапазона не должно быть больше или равным конечному');
-  } else {
-    return Math.floor(randomNumber);
-  }
-}
-
-alert(getRandomInteger(1, 50));
-
-// Функция, возвращающая случайное число с плавающей точкой
-const getRandomFloatingPoint = function (min, max, decimalDigits) {
-  if (min < 0) {
-    return new Error('Диапазон может быть больше или равен нулю');
-  } else if (decimalDigits < 0) {
-    return new Error('Кол-во чисел после запятой может быть больше или равен нулю');
-  } else if (min >= max) {
-    return new Error('Начальное значение диапазона не должно быть больше или равным конечному');
-  } else {
-    return Number((Math.random() * (max - min) + min).toFixed(decimalDigits));
-  }
-}
-alert(getRandomFloatingPoint(0, 9.9, 3));
-
-// Функция, возвращающая случайный элемент массива
-const getRandomElement = (items) => {
-// "|" for a kinda "int div"
-  return items[items.length * Math.random() | 0];
-}
-
-// Функция, возвращающая массив из случайных элементов заданного массива
-const getArrRandomLength = (arr) => {
-  return arr.slice(0, getRandomInteger(0, arr.length - 1));
+const isEscEvent = (evt) => {
+  return evt.key === 'Escape' || evt.key === 'Esc' || evt.code === 27;
 };
+
+const showAlert = (message) => {
+  const alertContainer = document.createElement('div');
+  alertContainer.style.zIndex = 100;
+  alertContainer.style.position = 'absolute';
+  alertContainer.style.left = 0;
+  alertContainer.style.top = 0;
+  alertContainer.style.right = 0;
+  alertContainer.style.padding = '10px 3px';
+  alertContainer.style.fontSize = '30px';
+  alertContainer.style.textAlign = 'center';
+  alertContainer.style.backgroundColor = 'red';
+  alertContainer.textContent = message;
+  document.body.append(alertContainer);
+
+  setTimeout(() => {
+    alertContainer.remove();
+  }, ALERT_SHOW_TIME);
+}
+export { getOfferType, isEscEvent, showAlert };
