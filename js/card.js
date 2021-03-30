@@ -4,7 +4,7 @@ const PHOTO_IMG_WIDTH = 45;
 const PHOTO_IMG_HEIGHT = 40;
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
 
-const renderCardElement = (author, offer) => {
+const provideCardElement = (author, offer) => {
   const cardElement = cardTemplate.cloneNode(true);
 
   const offerType = getOfferType(offer.type);
@@ -13,37 +13,37 @@ const renderCardElement = (author, offer) => {
   if (author.avatar) {
     cardElement.querySelector('.popup__avatar').src = author.avatar;
   } else {
-    cardElement.querySelector('.popup__avatar').classList.add('hidden');
+    cardElement.querySelector('.popup__avatar').classList.add('visually-hidden');
   }
   if (offer.title) {
     cardElement.querySelector('.popup__title').textContent = offer.title;
   } else {
-    cardElement.querySelector('.popup__title').classList.add('hidden');
+    cardElement.querySelector('.popup__title').classList.add('visually-hidden');
   }
   if (offer.address) {
     cardElement.querySelector('.popup__text--address').textContent = offer.address;
   } else {
-    cardElement.querySelector('.popup__text--address').classList.add('hidden');
+    cardElement.querySelector('.popup__text--address').classList.add('visually-hidden');
   }
   if (offer.price) {
     cardElement.querySelector('.popup__text--price').textContent = `${offer.price} ₽/ночь`;
   } else {
-    cardElement.querySelector('.popup__text--price').classList.add('hidden');
+    cardElement.querySelector('.popup__text--price').classList.add('visually-hidden');
   }
   if (offer.rooms || offer.guests) {
     cardElement.querySelector('.popup__text--capacity').textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
   } else {
-    cardElement.querySelector('.popup__text--capacity').classList.add('hidden');
+    cardElement.querySelector('.popup__text--capacity').classList.add('visually-hidden');
   }
   if (offer.checkin || offer.checkout) {
     cardElement.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
   } else {
-    cardElement.querySelector('.popup__text--time').classList.add('hidden');
+    cardElement.querySelector('.popup__text--time').classList.add('visually-hidden');
   }
   if (offer.description) {
     cardElement.querySelector('.popup__description').textContent = offer.description;
   } else {
-    cardElement.querySelector('.popup__description').classList.add('hidden');
+    cardElement.querySelector('.popup__description').classList.add('visually-hidden');
   }
   if ((offer.features).length > 0) {
     cardElement.querySelector('.popup__features').textContent = ' ';
@@ -56,7 +56,7 @@ const renderCardElement = (author, offer) => {
       featuresList.append(featuresItem);
     });
   } else {
-    cardElement.querySelector('.popup__features').classList.add('hidden');
+    cardElement.querySelector('.popup__features').classList.add('visually-hidden');
   }
   if ((offer.photos).length > 0) {
     cardElement.querySelector('.popup__photos').textContent = ' ';
@@ -69,9 +69,9 @@ const renderCardElement = (author, offer) => {
     });
 
   } else {
-    cardElement.querySelector('.popup__photos').classList.add('hidden');
+    cardElement.querySelector('.popup__photos').classList.add('visually-hidden');
   }
   return cardElement;
 };
 
-export {renderCardElement};
+export {provideCardElement};

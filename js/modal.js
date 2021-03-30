@@ -1,47 +1,47 @@
-import { isEscEvent } from './util.js';
+import {isEscapeEvent} from './util.js';
 
-const succesModalTemplate = document.querySelector('#success').content.querySelector('.success');
-const errorModalTemplate = document.querySelector('#error').content.querySelector('.error');
-const errorModalOpenBtn = errorModalTemplate.querySelector('.error__button');
+const successModuleTemplate = document.querySelector('#success').content.querySelector('.success');
+const errorModuleTemplate = document.querySelector('#error').content.querySelector('.error');
+const errorModuleOpenBtn = errorModuleTemplate.querySelector('.error__button');
 
-const errorModal = () => {
-  document.querySelector('main').appendChild(errorModalTemplate);
-  const onPopupEscKeydown = (evt) => {
-    if (isEscEvent(evt)) {
+const errorModule = () => {
+  document.querySelector('main').appendChild(errorModuleTemplate);
+  const onPopupKeydown = (evt) => {
+    if (isEscapeEvent(evt)) {
       evt.preventDefault();
-      closeErrorModal();
+      closeErrorModule();
     }
   };
-  document.addEventListener('keydown', onPopupEscKeydown);
+  document.addEventListener('keydown', onPopupKeydown);
   document.body.addEventListener('click', () => {
-    closeErrorModal();
+    closeErrorModule();
   });
 
-  const closeErrorModal = () => {
-    errorModalTemplate.remove();
-    document.removeEventListener('keydown', onPopupEscKeydown);
+  const closeErrorModule = () => {
+    errorModuleTemplate.remove();
+    document.removeEventListener('keydown', onPopupKeydown);
   };
-  errorModalOpenBtn.addEventListener('click', () => {
-    closeErrorModal();
+  errorModuleOpenBtn.addEventListener('click', () => {
+    closeErrorModule();
   });
 };
 
-const successModal = () => {
-  document.querySelector('main').appendChild(succesModalTemplate);
-  const onPopupEscKeydown = (evt) => {
-    if (isEscEvent(evt)) {
+const successModule = () => {
+  document.querySelector('main').appendChild(successModuleTemplate);
+  const onPopupKeydown = (evt) => {
+    if (isEscapeEvent(evt)) {
       evt.preventDefault();
-      closeSuccessModal();
+      closeSuccessModule();
     }
   };
-  document.addEventListener('keydown', onPopupEscKeydown);
+  document.addEventListener('keydown', onPopupKeydown);
   document.body.addEventListener('click', () => {
-    closeSuccessModal();
+    closeSuccessModule();
   });
-  const closeSuccessModal = () => {
-    succesModalTemplate.remove();
-    document.removeEventListener('keydown', onPopupEscKeydown);
+  const closeSuccessModule = () => {
+    successModuleTemplate.remove();
+    document.removeEventListener('keydown', onPopupKeydown);
   };
 }
 
-export { successModal, errorModal };
+export {successModule, errorModule};

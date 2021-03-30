@@ -1,6 +1,6 @@
-import { successModal, errorModal } from './modal.js';
-import { sendData } from './api.js';
-import { updateMarkersMap } from './main.js';
+import {successModule, errorModule} from './modal.js';
+import {transferData} from './api.js';
+import {updateMarkersMap} from './main.js';
 
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
@@ -44,38 +44,38 @@ const CAPACITY_SETTINGS = {
   100: [3, 3],
 }
 
-//  Неактивное состояние / Активное состояние
-const addElementDisabled = (formElements) => {
+//  Неактивное / Активное
+const addElementDisabling = (formElements) => {
   formElements.forEach(element => {
     element.setAttribute('disabled', 'true');
   });
 };
-const removeElementDisabled = (formElements) => {
+const deleteElementDisabling = (formElements) => {
   formElements.forEach(element => {
     element.removeAttribute('disabled');
   });
 };
 
-const deactivatePage = () => {
+const unplugPage = () => {
   adForm.classList.add('ad-form--disabled');
   mapForm.classList.add('ad-form--disabled');
-  addElementDisabled(adFormElement);
-  addElementDisabled(mapFormElement);
-  addElementDisabled(mapFormCheckbox);
+  addElementDisabling(adFormElement);
+  addElementDisabling(mapFormElement);
+  addElementDisabling(mapFormCheckbox);
 };
 
-const activatePage = () => {
+const includePage = () => {
   adForm.classList.remove('ad-form--disabled');
   mapForm.classList.remove('ad-form--disabled');
-  removeElementDisabled(adFormElement);
-  removeElementDisabled(mapFormElement);
-  removeElementDisabled(mapFormCheckbox);
+  deleteElementDisabling(adFormElement);
+  deleteElementDisabling(mapFormElement);
+  deleteElementDisabling(mapFormCheckbox);
 };
 
 
 // Валидация
 const typeSelect = document.querySelector('#type');
-const getPriceMinValue = (typeSelectValue) => {
+const getPriceMinimumValue = (typeSelectValue) => {
   switch (typeSelectValue) {
     case 'flat':
       return 1000;
@@ -91,9 +91,9 @@ const getPriceMinValue = (typeSelectValue) => {
 };
 
 typeSelect.addEventListener('change', () => {
-  const priceMin = getPriceMinValue(typeSelect.value);
-  document.querySelector('#price').placeholder = priceMin;
-  document.querySelector('#price').min = priceMin;
+  const priceMinimum = getPriceMinimumValue(typeSelect.value);
+  document.querySelector('#price').placeholder = priceMinimum;
+  document.querySelector('#price').min = priceMinimum;
 });
 
 let timeIn = document.querySelector('#timein');
@@ -110,7 +110,7 @@ timeOut.addEventListener('change', (event) => {
 let numberRooms = document.querySelector('#room_number');
 let capacity = document.querySelector('#capacity');
 
-const disableCapacities = () => {
+const disablingCapacities = () => {
   for (let i = 0; i < capacity.length; i++) {
     capacity[i].setAttribute('disabled', 'true');
   }
@@ -122,7 +122,7 @@ const enableCapacities = (start, end) => {
 }
 
 if (+numberRooms.value === 1) {
-  disableCapacities();
+  disablingCapacities();
   capacity[2].selected = true;
   capacity[2].removeAttribute('disabled');
 }
@@ -136,7 +136,7 @@ numberRooms.addEventListener('change', () => {
   const numberRoomValue = +numberRooms.value;
   const settings = CAPACITY_SETTINGS[numberRoomValue];
   if (settings) {
-    disableCapacities();
+    disablingCapacities();
     enableCapacities(...settings);
     if (numberRoomValue === 100) {
       capacity[3].selected = true;
@@ -205,16 +205,16 @@ const addFile = () => {
   });
 }
 
-const removeImg = () => {
+const deleteImg = () => {
   avatarUserPreview.src = DEFAULT_AVATAR_IMG_SRC;
-  const housingImgs = document.querySelectorAll('.ad-form__photo-list img');
-  housingImgs.forEach(element => element.remove());
+  const housingImg = document.querySelectorAll('.ad-form__photo-list img');
+  housingImg.forEach(element => element.remove());
   housingImgPreviewList.append(housingImgPreviewItem);
 }
 
-// Отправка формы
-const onFormSuccess = () => {
-  removeImg();
+// Отправление формы
+const onFormLuck = () => {
+  deleteImg();
   document.querySelector('#title').value = '';
   document.querySelector('#address').value = ADDRESS_DEFAULT_COORDINATES;
   document.querySelector('#type').value = typeDefault;
@@ -238,27 +238,27 @@ const onFormSuccess = () => {
   });
 
   updateMarkersMap()
-  successModal();
+  successModule();
 };
 
 btnReset.addEventListener('click', () => {
-  removeImg()
+  deleteImg()
 })
 
-const onError = () => {
-  errorModal();
+const onFailure = () => {
+  errorModule();
 };
 
-const setUserFormSubmit = (onSuccess) => {
+const setFormSubmit = (onLuck) => {
   adForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
-    sendData(
-      onSuccess,
-      onError,
+    transferData(
+      onLuck,
+      onFailure,
       new FormData(evt.target),
     );
   });
 };
 
-export { deactivatePage, activatePage, setUserFormSubmit, onFormSuccess, addFile };
+export {unplugPage, includePage, setFormSubmit, onFormLuck, addFile};
