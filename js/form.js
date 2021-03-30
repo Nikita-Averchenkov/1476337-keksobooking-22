@@ -4,6 +4,9 @@ import {updateMarkersMap} from './main.js';
 
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
+const HOUSING_IMG_WIDTH = 70;
+const HOUSING_IMG_HEIGHT = 70;
+const DEFAULT_AVATAR_IMG_SRC = 'img/muffin-grey.svg';
 const FILES_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 const ADDRESS_DEFAULT_COORDINATES = '35.6895000, 139.6917100';
 const adForm = document.querySelector('.ad-form');
@@ -24,11 +27,8 @@ const descriptionDefault = document.querySelector('#description').value;
 const avatarUser = document.querySelector('.ad-form__field input[type=file]');
 const avatarUserPreview = document.querySelector('.ad-form-header__preview img');
 const housingImg = document.querySelector('.ad-form__upload input[type=file]');
-const HOUSING_IMG_WIDTH = 70;
-const HOUSING_IMG_HEIGHT = 70;
 const housingImgPreviewList = document.querySelector('.ad-form__photo-list');
 const housingImgPreviewItem = document.querySelector('.ad-form__photo');
-const DEFAULT_AVATAR_IMG_SRC = 'img/muffin-grey.svg';
 const btnReset = document.querySelector('.ad-form__reset');
 
 const housingTypeDefault = document.querySelector('#housing-type').value;

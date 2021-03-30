@@ -1,12 +1,12 @@
+const FILTER_DEFAULT_VALUE = 'any';
+const OFFER_PRICE_MIN = 10000;
+const OFFER_PRICE_MAX = 50000;
+const MAX_PINS = 10;
 const mapFilterFormat = document.querySelector('.map__filters');
 const housingType = mapFilterFormat.querySelector('#housing-type');
 const housingPrice = mapFilterFormat.querySelector('#housing-price');
 const housingRooms = mapFilterFormat.querySelector('#housing-rooms');
 const housingGuests = mapFilterFormat.querySelector('#housing-guests');
-const FILTER_DEFAULT_VALUE = 'any';
-const OFFER_PRICE_MIN = 10000;
-const OFFER_PRICE_MAX = 50000;
-const MAX_PINS = 10;
 
 const filterOnType = (ad) => {
   return housingType.value === FILTER_DEFAULT_VALUE || ad.offer.type === housingType.value
