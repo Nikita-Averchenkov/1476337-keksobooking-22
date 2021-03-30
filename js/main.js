@@ -9,7 +9,7 @@ const RERENDER_DELAY = 500;
 
 obtainData((declarations) => {
   renderMarkers(declarations);
-  setFilterChanger(_.debounce(
+  setFilterChanger(RERENDER_DELAY.debounce(
     () => renderMarkers(declarations),
     RERENDER_DELAY,
   ));
