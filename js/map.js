@@ -1,6 +1,6 @@
-import { deactivatePage, activatePage  } from './form.js';
-import { renderCardElement } from './card.js';
-import { filterDeclarations } from './filter.js';
+import {unplugPage, includePage} from './form.js';
+import {provideCardElement} from './card.js';
+import {filterDeclarations} from './filter.js';
 
 const ICON_SIZE_WIDTH = 52;
 const ICON_SIZE_HEIGHT = 52;
@@ -10,11 +10,11 @@ const LAT = 35.6895000;
 const LNG = 139.6917100;
 const DECLARATION_COUNT = 10;
 
-deactivatePage();
+unplugPage();
 let L = window.L;
 const map = L.map('map-canvas')
   .on('load', () => {
-    activatePage ();
+    includePage();
   })
   .setView({
     lat: LAT,
@@ -83,7 +83,7 @@ const markerLayer = L.layerGroup().addTo(map);
 const renderMarkers = (declarations) => {
   markerLayer.clearLayers();
   const filteredData = filterDeclarations(declarations).slice(0, DECLARATION_COUNT);
-  filteredData.forEach(({ author, offer, location }) => {
+  filteredData.forEach(({author, offer, location}) => {
     const declarationsLat = location.lat;
     const declarationsLng = location.lng;
 
@@ -99,9 +99,9 @@ const renderMarkers = (declarations) => {
     marker
       .addTo(markerLayer)
       .bindPopup(
-        renderCardElement(author, offer),
+        provideCardElement(author, offer),
       );
   })
 }
 
-export { renderMarkers, renderMainMarker };
+export {renderMarkers, renderMainMarker};

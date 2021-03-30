@@ -1,17 +1,17 @@
-import {showAlert} from './util.js';
+import {showWarning} from './util.js';
 
-const getData = (onSuccess) => {
+const obtainData = (onLuck) => {
   fetch('https://22.javascript.pages.academy/keksobooking/data')
     .then((response) => response.json())
     .then((declarations) => {
-      onSuccess(declarations);
+      onLuck(declarations);
     })
     .catch(() => {
-      showAlert('Не удалось получить данные. Попробуйте обновить страницу');
+      showWarning('Не удалось получить данные. Попробуйте обновить страницу');
     });
 };
 
-const sendData = (onSuccess, onError, body) => {
+const transferData = (onLuck, onFailure, body) => {
   fetch(
     'https://22.javascript.pages.academy/keksobooking',
     {
@@ -20,14 +20,14 @@ const sendData = (onSuccess, onError, body) => {
     },
   ).then((response) => {
     if (response.ok) {
-      onSuccess();
+      onLuck();
     } else {
-      onError();
+      onFailure();
     }
   })
     .catch(() => {
-      onError();
+      onFailure();
     });
 };
 
-export {getData, sendData};
+export {obtainData, transferData};

@@ -1,4 +1,4 @@
-const ALERT_SHOW_TIME = 5000;
+const WARNING_SHOW_TIME = 5000;
 
 const getOfferType = (types) => {
   switch (types) {
@@ -15,26 +15,26 @@ const getOfferType = (types) => {
   }
 };
 
-const isEscEvent = (evt) => {
+const isEscapeEvent = (evt) => {
   return evt.key === 'Escape' || evt.key === 'Esc' || evt.code === 27;
 };
 
-const showAlert = (message) => {
-  const alertContainer = document.createElement('div');
-  alertContainer.style.zIndex = 100;
-  alertContainer.style.position = 'absolute';
-  alertContainer.style.left = 0;
-  alertContainer.style.top = 0;
-  alertContainer.style.right = 0;
-  alertContainer.style.padding = '10px 3px';
-  alertContainer.style.fontSize = '30px';
-  alertContainer.style.textAlign = 'center';
-  alertContainer.style.backgroundColor = 'red';
-  alertContainer.textContent = message;
-  document.body.append(alertContainer);
+const showWarning = (message) => {
+  const warningContainer = document.createElement('div');
+  warningContainer.style.zIndex = 100;
+  warningContainer.style.position = 'absolute';
+  warningContainer.style.left = 0;
+  warningContainer.style.top = 0;
+  warningContainer.style.right = 0;
+  warningContainer.style.padding = '10px 3px';
+  warningContainer.style.fontSize = '30px';
+  warningContainer.style.textAlign = 'center';
+  warningContainer.style.backgroundColor = 'red';
+  warningContainer.textContent = message;
+  document.body.append(warningContainer);
 
   setTimeout(() => {
-    alertContainer.remove();
-  }, ALERT_SHOW_TIME);
+    warningContainer.remove();
+  }, WARNING_SHOW_TIME);
 }
-export { getOfferType, isEscEvent, showAlert };
+export {getOfferType, isEscapeEvent, showWarning};
